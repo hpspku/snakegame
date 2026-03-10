@@ -313,24 +313,28 @@
         .level-btn[data-level="1"] {
             background: radial-gradient(circle, #90EE90 0%, #228B22 100%);
             border: 3px solid #006400;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
         /* 关卡2 - 红色波克布林 Red Bokoblin */
         .level-btn[data-level="2"] {
             background: radial-gradient(circle, #FF6347 0%, #8B0000 100%);
             border: 3px solid #DC143C;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
         }
 
         /* 关卡3 - 蓝色波克布林 Blue Bokoblin */
         .level-btn[data-level="3"] {
             background: radial-gradient(circle, #4169E1 0%, #000080 100%);
             border: 3px solid #1E90FF;
+            box-shadow: 0 0 15px rgba(0, 0, 255, 0.3);
         }
 
         /* 关卡4 - 黑色波克布林 Black Bokoblin */
         .level-btn[data-level="4"] {
             background: radial-gradient(circle, #696969 0%, #1C1C1C 100%);
             border: 3px solid #000000;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
         }
 
         /* 关卡5 - 蜥蜴战士 Lizalfos */
@@ -338,12 +342,14 @@
             background: radial-gradient(circle, #32CD32 0%, #006400 100%);
             border: 3px solid #228B22;
             animation: monsterBreath 2s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
         }
 
         /* 关卡6 - 莫力布林 Moblin */
         .level-btn[data-level="6"] {
             background: radial-gradient(circle, #FF4500 0%, #8B0000 100%);
             border: 3px solid #FF0000;
+            box-shadow: 0 0 25px rgba(255, 69, 0, 0.5);
         }
 
         /* 关卡7 - 西诺克斯 Hinox (一只眼) */
@@ -1130,17 +1136,18 @@
             grid.innerHTML = '';
             
             // 塞尔达旷野之息怪物列表，按强度从弱到强
+            // 使用更精确的emoji组合和CSS效果来模拟怪物外观
             const monsters = [
-                { emoji: '👾', name: '丘丘' },           // 关卡1: 丘丘/Chuchu (最弱)
-                { emoji: '🐷', name: '波克' },           // 关卡2: 红色波克布林/Red Bokoblin (普通)
-                { emoji: '🐵', name: '蓝波' },           // 关卡3: 蓝色波克布林/Blue Bokoblin (中等)
-                { emoji: '🦍', name: '黑波' },           // 关卡4: 黑色波克布林/Black Bokoblin (较强)
-                { emoji: '🦎', name: '蜥蜴' },           // 关卡5: 蜥蜴战士/Lizalfos (精英)
-                { emoji: '🐗', name: '莫力' },           // 关卡6: 莫力布林/Moblin (小Boss)
-                { emoji: '👹', name: '西诺' },           // 关卡7: 西诺克斯/Hinox (大Boss)
-                { emoji: '🤖', name: '守护者' },          // 关卡8: 守护者/Guardian (Boss级)
-                { emoji: '🦌', name: '人马' },           // 关卡9: 人马/Lynel (精英Boss)
-                { emoji: '💀👑', name: '盖侬' }          // 关卡10: 灾厄盖侬/Calamity Ganon (最终Boss)
+                { emoji: '💧', name: '丘丘', cssClass: 'chuchu' },           // 关卡1: 丘丘/Chuchu (凝胶状)
+                { emoji: '🐽', name: '波克', cssClass: 'bokoblin' },        // 关卡2: 红色波克布林/Red Bokoblin
+                { emoji: '🐵🔵', name: '蓝波', cssClass: 'blue-bokoblin' },  // 关卡3: 蓝色波克布林/Blue Bokoblin
+                { emoji: '🐵⚫', name: '黑波', cssClass: 'black-bokoblin' }, // 关卡4: 黑色波克布林/Black Bokoblin
+                { emoji: '🦎🗡️', name: '蜥蜴', cssClass: 'lizalfos' },       // 关卡5: 蜥蜴战士/Lizalfos
+                { emoji: '🐗🪓', name: '莫力', cssClass: 'moblin' },          // 关卡6: 莫力布林/Moblin
+                { emoji: '👁️👊', name: '西诺', cssClass: 'hinox' },          // 关卡7: 西诺克斯/Hinox (独眼巨人)
+                { emoji: '🤖⚡', name: '守护者', cssClass: 'guardian' },      // 关卡8: 守护者/Guardian
+                { emoji: '🦁🗡️', name: '人马', cssClass: 'lynel' },          // 关卡9: 人马/Lynel
+                { emoji: '💀👑🔥', name: '盖侬', cssClass: 'ganon' }        // 关卡10: 灾厄盖侬/Calamity Ganon
             ];
             
             for (let i = 1; i <= TOTAL_LEVELS; i++) {
