@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#4CAF50</color>
+    <color name="primary_dark">#388E3C</color>
+    <color name="snake_head">#00E676</color>
+    <color name="snake_body">#69F0AE</color>
+    <color name="food">#FF5252</color>
+    <color name="grid">#2a2a4a</color>
+    <color name="background">#1a1a2e</color>
+</resources>
