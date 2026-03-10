@@ -309,6 +309,39 @@
             z-index: 1;
         }
 
+        /* 怪物图标SVG样式 */
+        .monster-icon svg {
+            width: 50px;
+            height: 50px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            transition: all 0.3s ease;
+        }
+
+        .level-btn:hover .monster-icon svg {
+            transform: scale(1.1);
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+        }
+
+        /* 怪物呼吸动画 */
+        .monster-breath {
+            animation: monsterBreath 2s ease-in-out infinite;
+        }
+
+        @keyframes monsterBreath {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* 盖侬邪气动画 */
+        .ganon-aura {
+            animation: ganonAura 1.5s ease-in-out infinite;
+        }
+
+        @keyframes ganonAura {
+            0%, 100% { filter: drop-shadow(0 0 10px #9400D3); }
+            50% { filter: drop-shadow(0 0 20px #FF0000); }
+        }
+
         /* 关卡1 - 丘丘 Chuchu (绿色) */
         .level-btn[data-level="1"] {
             background: radial-gradient(circle, #90EE90 0%, #228B22 100%);
@@ -316,87 +349,75 @@
             box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
-        /* 关卡2 - 红色波克布林 Red Bokoblin */
+        /* 关卡2 - 蜜蜂 Bee (黄黑条纹) */
         .level-btn[data-level="2"] {
+            background: radial-gradient(circle, #FFD700 0%, #FFA500 50%, #8B0000 100%);
+            border: 3px solid #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        /* 关卡3 - 蝙蝠 Keese (深红色) */
+        .level-btn[data-level="3"] {
+            background: radial-gradient(circle, #DC143C 0%, #8B0000 50%, #2F0F0F 100%);
+            border: 3px solid #FF0000;
+            box-shadow: 0 0 15px rgba(220, 20, 60, 0.4);
+        }
+
+        /* 关卡4 - 波克布林 Bokoblin (红色) */
+        .level-btn[data-level="4"] {
             background: radial-gradient(circle, #FF6347 0%, #8B0000 100%);
             border: 3px solid #DC143C;
             box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
         }
 
-        /* 关卡3 - 蓝色波克布林 Blue Bokoblin */
-        .level-btn[data-level="3"] {
-            background: radial-gradient(circle, #4169E1 0%, #000080 100%);
-            border: 3px solid #1E90FF;
-            box-shadow: 0 0 15px rgba(0, 0, 255, 0.3);
-        }
-
-        /* 关卡4 - 黑色波克布林 Black Bokoblin */
-        .level-btn[data-level="4"] {
-            background: radial-gradient(circle, #696969 0%, #1C1C1C 100%);
-            border: 3px solid #000000;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-        }
-
-        /* 关卡5 - 蜥蜴战士 Lizalfos */
+        /* 关卡5 - 莫力布林 Moblin (橙色) */
         .level-btn[data-level="5"] {
+            background: radial-gradient(circle, #FF4500 0%, #8B0000 100%);
+            border: 3px solid #FF0000;
+            box-shadow: 0 0 25px rgba(255, 69, 0, 0.5);
+        }
+
+        /* 关卡6 - 蜥蜴战士 Lizalfos (绿色) */
+        .level-btn[data-level="6"] {
             background: radial-gradient(circle, #32CD32 0%, #006400 100%);
             border: 3px solid #228B22;
             animation: monsterBreath 2s ease-in-out infinite;
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
         }
 
-        /* 关卡6 - 莫力布林 Moblin */
-        .level-btn[data-level="6"] {
-            background: radial-gradient(circle, #FF4500 0%, #8B0000 100%);
-            border: 3px solid #FF0000;
-            box-shadow: 0 0 25px rgba(255, 69, 0, 0.5);
-        }
-
-        /* 关卡7 - 西诺克斯 Hinox (一只眼) */
+        /* 关卡7 - 西诺克斯 Hinox (棕色独眼巨人) */
         .level-btn[data-level="7"] {
             background: radial-gradient(circle, #8B4513 0%, #4A2500 100%);
             border: 3px solid #654321;
             box-shadow: 0 0 20px rgba(139, 69, 19, 0.5);
         }
 
-        /* 关卡8 - 守护者 Guardian */
+        /* 关卡8 - 岩石巨人 Stone Talus (灰色) */
         .level-btn[data-level="8"] {
-            background: radial-gradient(circle, #E0FFFF 0%, #00CED1 50%, #008B8B 100%);
-            border: 3px solid #20B2AA;
-            box-shadow: 0 0 30px rgba(0, 206, 209, 0.6);
-            animation: guardianPulse 1s ease-in-out infinite;
+            background: radial-gradient(circle, #D3D3D3 0%, #A9A9A9 50%, #696969 100%);
+            border: 3px solid #A9A9A9;
+            box-shadow: 0 0 25px rgba(169, 169, 169, 0.5);
         }
 
-        @keyframes guardianPulse {
-            0%, 100% { 
-                transform: scale(1); 
-                box-shadow: 0 0 30px rgba(0, 206, 209, 0.6); 
-            }
-            50% { 
-                transform: scale(1.05); 
-                box-shadow: 0 0 50px rgba(0, 206, 209, 0.9); 
-            }
-        }
-
-        /* 关卡9 - 人马 Lynel (精英) */
+        /* 关卡9 - 莱尼尔 Lynel (金棕色精英) */
         .level-btn[data-level="9"] {
-            background: radial-gradient(circle, #FFD700 0%, #FFA500 50%, #8B0000 100%);
+            background: radial-gradient(circle, #FFD700 0%, #CD853F 50%, #8B7355 100%);
             border: 3px solid #FFD700;
             box-shadow: 0 0 40px rgba(255, 215, 0, 0.7);
             animation: goldGlow 2s ease-in-out infinite;
         }
 
-        /* 关卡10 - 灾厄盖侬 Calamity Ganon (最终Boss) */
+        /* 关卡10 - 盖侬 Ganon (紫红色最终Boss) */
         .level-btn[data-level="10"] {
-            background: radial-gradient(circle, #4B0082 0%, #800080 50%, #000000 100%);
+            background: radial-gradient(circle, #9400D3 0%, #4B0082 50%, #000000 100%);
             border: 4px solid #FF0000;
-            box-shadow: 0 0 50px rgba(139, 0, 139, 0.8), 0 0 30px rgba(255, 0, 0, 0.6);
+            box-shadow: 0 0 50px rgba(148, 0, 211, 0.8), 0 0 30px rgba(255, 0, 0, 0.6);
             animation: ganonPulse 1.5s ease-in-out infinite;
         }
 
         @keyframes monsterBreath {
-            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 6px 25px rgba(255, 140, 0, 0.5); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         @keyframes goldGlow {
@@ -406,7 +427,7 @@
 
         @keyframes ganonPulse {
             0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(139, 0, 139, 0.6), 0 0 20px rgba(255, 0, 0, 0.4); }
-            50% { transform: scale(1.1); box-shadow: 0 0 60px rgba(139, 0, 139, 0.9), 0 0 40px rgba(255, 0, 0, 0.7); }
+            50% { transform: scale(1.1); box-shadow: 0 0 60px rgba(148, 0, 211, 0.9), 0 0 40px rgba(255, 0, 0, 0.7); }
         }
 
         /* 未解锁状态 */
@@ -1049,6 +1070,74 @@
             sounds[Math.floor(Math.random() * sounds.length)]();
         }
 
+        // 怪物专属音效
+        function playMonsterSound(monsterType) {
+            switch(monsterType) {
+                case 'chuchu':
+                    // 丘丘: 软萌的凝胶声
+                    playTone(400, 0.1, 'sine');
+                    setTimeout(() => playTone(450, 0.1, 'sine'), 100);
+                    setTimeout(() => playTone(500, 0.15, 'sine'), 200);
+                    break;
+                case 'bee':
+                    // 蜜蜂: 嗡嗡声
+                    playTone(800, 0.1, 'sawtooth');
+                    setTimeout(() => playTone(900, 0.1, 'sawtooth'), 80);
+                    setTimeout(() => playTone(800, 0.1, 'sawtooth'), 160);
+                    break;
+                case 'bat':
+                    // 蝙蝠: 尖叫声
+                    playTone(1200, 0.05, 'square');
+                    setTimeout(() => playTone(1100, 0.08, 'square'), 60);
+                    setTimeout(() => playTone(1300, 0.06, 'square'), 120);
+                    break;
+                case 'bokoblin':
+                    // 波克布林: 猪叫声
+                    playTone(300, 0.15, 'sawtooth');
+                    setTimeout(() => playTone(250, 0.1, 'sawtooth'), 150);
+                    setTimeout(() => playTone(280, 0.12, 'sawtooth'), 280);
+                    break;
+                case 'moblin':
+                    // 莫力布林: 深沉吼声
+                    playTone(180, 0.2, 'sawtooth');
+                    setTimeout(() => playTone(150, 0.15, 'sawtooth'), 200);
+                    setTimeout(() => playTone(160, 0.18, 'sawtooth'), 380);
+                    break;
+                case 'lizalfos':
+                    // 蜥蜴战士: 咝咝声
+                    playTone(600, 0.08, 'sawtooth');
+                    setTimeout(() => playTone(700, 0.08, 'sawtooth'), 80);
+                    setTimeout(() => playTone(650, 0.1, 'sawtooth'), 160);
+                    break;
+                case 'hinox':
+                    // 西诺克斯: 重击声
+                    playTone(120, 0.3, 'square');
+                    setTimeout(() => playTone(100, 0.25, 'square'), 350);
+                    break;
+                case 'talus':
+                    // 岩石巨人: 石头碰撞声
+                    playTone(200, 0.1, 'square');
+                    setTimeout(() => playTone(180, 0.15, 'square'), 120);
+                    setTimeout(() => playTone(220, 0.1, 'square'), 280);
+                    break;
+                case 'lynel':
+                    // 莱尼尔: 威猛咆哮
+                    playTone(150, 0.2, 'sawtooth');
+                    setTimeout(() => playTone(120, 0.15, 'sawtooth'), 200);
+                    setTimeout(() => playTone(180, 0.25, 'sawtooth'), 380);
+                    setTimeout(() => playTone(140, 0.2, 'sawtooth'), 650);
+                    break;
+                case 'ganon':
+                    // 盖侬: 邪恶笑声
+                    playTone(100, 0.15, 'sawtooth');
+                    setTimeout(() => playTone(80, 0.2, 'sawtooth'), 150);
+                    setTimeout(() => playTone(120, 0.18, 'sawtooth'), 380);
+                    setTimeout(() => playTone(90, 0.25, 'sawtooth'), 600);
+                    setTimeout(() => playTone(70, 0.3, 'sawtooth'), 880);
+                    break;
+            }
+        }
+
         function playRewardSound() {
             const melody = [523.25, 587.33, 659.25, 698.46, 783.99, 880, 987.77, 1046.50];
             melody.forEach((freq, i) => {
@@ -1135,49 +1224,304 @@
             const grid = document.getElementById('levelsGrid');
             grid.innerHTML = '';
             
-            // 塞尔达旷野之息怪物列表，按强度从弱到强
-            // 使用更精确的emoji组合和CSS效果来模拟怪物外观
-            const monsters = [
-                { emoji: '💧', name: '丘丘', cssClass: 'chuchu' },           // 关卡1: 丘丘/Chuchu (凝胶状)
-                { emoji: '🐽', name: '波克', cssClass: 'bokoblin' },        // 关卡2: 红色波克布林/Red Bokoblin
-                { emoji: '🐵🔵', name: '蓝波', cssClass: 'blue-bokoblin' },  // 关卡3: 蓝色波克布林/Blue Bokoblin
-                { emoji: '🐵⚫', name: '黑波', cssClass: 'black-bokoblin' }, // 关卡4: 黑色波克布林/Black Bokoblin
-                { emoji: '🦎🗡️', name: '蜥蜴', cssClass: 'lizalfos' },       // 关卡5: 蜥蜴战士/Lizalfos
-                { emoji: '🐗🪓', name: '莫力', cssClass: 'moblin' },          // 关卡6: 莫力布林/Moblin
-                { emoji: '👁️👊', name: '西诺', cssClass: 'hinox' },          // 关卡7: 西诺克斯/Hinox (独眼巨人)
-                { emoji: '🤖⚡', name: '守护者', cssClass: 'guardian' },      // 关卡8: 守护者/Guardian
-                { emoji: '🦁🗡️', name: '人马', cssClass: 'lynel' },          // 关卡9: 人马/Lynel
-                { emoji: '💀👑🔥', name: '盖侬', cssClass: 'ganon' }        // 关卡10: 灾厄盖侬/Calamity Ganon
-            ];
+        // 塞尔达旷野之息怪物列表 - 按强度从弱到强
+        // 10关怪物名称：丘丘、蜜蜂、蝙蝠、波克布林、莫力布林、蜥蜴战士、西诺克斯、岩石巨人、莱尼尔、盖侬
+        const monsters = [
+            // 关卡1: 丘丘 Chuchu - 凝胶状怪物
+            {
+                name: '丘丘',
+                sound: 'chuchu',
+                cssClass: 'chuchu',
+                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <radialGradient id="chuchuGrad" cx="50%" cy="40%" r="60%">
+                            <stop offset="0%" style="stop-color:#98FB98;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#2E8B57;stop-opacity:1" />
+                        </radialGradient>
+                    </defs>
+                    <ellipse cx="50" cy="65" rx="35" ry="30" fill="url(#chuchuGrad)" opacity="0.9"/>
+                    <ellipse cx="50" cy="45" rx="28" ry="25" fill="url(#chuchuGrad)" opacity="0.95"/>
+                    <circle cx="42" cy="38" r="5" fill="#333"/>
+                    <circle cx="58" cy="38" r="5" fill="#333"/>
+                    <circle cx="43" cy="37" r="2" fill="white"/>
+                    <circle cx="59" cy="37" r="2" fill="white"/>
+                    <ellipse cx="50" cy="50" rx="8" ry="6" fill="#333"/>
+                    <path d="M48 48 Q50 52 52 48" stroke="white" stroke-width="2" fill="none"/>
+                </svg>`
+            },
+            // 关卡2: 蜜蜂 Bee - 小型飞行怪物
+            {
+                name: '蜜蜂',
+                sound: 'bee',
+                cssClass: 'bee',
+                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="beeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#FFA500;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <ellipse cx="50" cy="50" rx="25" ry="20" fill="url(#beeGrad)"/>
+                    <rect x="40" y="35" width="5" height="30" fill="#333" opacity="0.8"/>
+                    <rect x="52" y="35" width="5" height="30" fill="#333" opacity="0.8"/>
+                    <circle cx="65" cy="50" r="8" fill="#87CEEB" opacity="0.7"/>
+                    <circle cx="62" cy="48" r="2" fill="#333"/>
+                    <path d="M30 50 L15 45 L15 55 Z" fill="transparent" stroke="#333" stroke-width="3"/>
+                    <path d="M30 50 L15 45 Q10 50 15 55" fill="transparent" stroke="#333" stroke-width="2"/>
+                    <circle cx="35" cy="45" r="3" fill="#333"/>
+                    <circle cx="40" cy="40" r="2" fill="#333"/>
+                </svg>`
+            },
+            // 关卡3: 蝙蝠 Keese - 夜间飞行怪物
+            {
+                name: '蝙蝠',
+                sound: 'bat',
+                cssClass: 'bat',
+                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <radialGradient id="batGrad" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" style="stop-color:#8B0000;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#2F0F0F;stop-opacity:1" />
+                        </radialGradient>
+                    </defs>
+                    <circle cx="50" cy="50" r="18" fill="url(#batGrad)"/>
+                    <circle cx="44" cy="46" r="4" fill="#FF0000"/>
+                    <circle cx="44" cy="45" r="1.5" fill="#333"/>
+                    <circle cx="56" cy="46" r="4" fill="#FF0000"/>
+                    <circle cx="56" cy="45" r="1.5" fill="#333"/>
+                    <path d="M32 50 Q15 25 5 35 Q15 45 32 48" fill="url(#batGrad)"/>
+                    <path d="M68 50 Q85 25 95 35 Q85 45 68 48" fill="url(#batGrad)"/>
+                    <path d="M68 52 Q85 75 95 65 Q85 55 68 52" fill="url(#batGrad)"/>
+                    <path d="M32 52 Q15 75 5 65 Q15 55 32 52" fill="url(#batGrad)"/>
+                    <path d="M45 58 L50 65 L55 58" fill="#333"/>
+                    <path d="M48 58 L52 65" stroke="#fff" stroke-width="1" fill="none"/>
+                </svg>`
+            },
+            // 关卡4: 波克布林 Bokoblin - 猪型怪物
+            {
+                name: '波克布林',
+                sound: 'bokoblin',
+                cssClass: 'bokoblin',
+                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="bokoGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#8B0000;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <ellipse cx="50" cy="65" rx="28" ry="25" fill="url(#bokoGrad)"/>
+                    <circle cx="50" cy="40" r="22" fill="url(#bokoGrad)"/>
+                    <ellipse cx="50" cy="50" rx="8" ry="10" fill="#FFC0CB"/>
+                    <circle cx="50" cy="46" r="6" fill="#333"/>
+                    <circle cx="52" cy="44" r="2" fill="white"/>
+                    <path d="M28 35 L22 20 L35 32" fill="url(#bokoGrad)"/>
+                    <path d="M72 35 L78 20 L65 32" fill="url(#bokoGrad)"/>
+                    <path d="M42 55 Q50 60 58 55" stroke="#333" stroke-width="2" fill="none"/>
+                    <rect x="47" y="60" width="6" height="8" fill="#FFC0CB" rx="2"/>
+                </svg>`
+            },
+            // 关卡5: 莫力布林 Moblin - 大型猪型怪物
+            {
+                name: '莫力布林',
+                sound: 'moblin',
+                cssClass: 'moblin',
+                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="moblinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF4500;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#8B2500;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <ellipse cx="50" cy="70" rx="30" ry="28" fill="url(#moblinGrad)"/>
+                    <circle cx="50" cy="38" r="25" fill="url(#moblinGrad)"/>
+                    <ellipse cx="50" cy="48" rx="10" ry="12" fill="#FFB6C1"/>
+                    <circle cx="50" cy="44" r="8" fill="#333"/>
+                    <circle cx="52" cy="42" r="2.5" fill="white"/>
+                    <path d="M25 30 L18 10 L35 28" fill="url(#moblinGrad)" stroke="#333" stroke-width="1"/>
+                    <path d="M75 30 L82 10 L65 28" fill="url(#moblinGrad)" stroke="#333" stroke-width="1"/>
+                    <path d="M38 58 Q50 65 62 58" stroke="#333" stroke-width="3" fill="none"/>
+                    <rect x="46" y="65" width="8" height="10" fill="#FFB6C1" rx="3"/>
+                    <ellipse cx="50" cy="90" rx="12" ry="6" fill="#333" opacity="0.3"/>
+                </svg>`
+            },
+            // 关卡6: 蜥蜴战士 Lizalfos - 敏捷蜥蜴怪物
+            {
+                name: '蜥蜴战士',
+                sound: 'lizalfos',
+                cssClass: 'lizalfos',
+                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="lizaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#32CD32;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#006400;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <ellipse cx="50" cy="70" rx="20" ry="25" fill="url(#lizaGrad)"/>
+                    <circle cx="50" cy="35" r="20" fill="url(#lizaGrad)"/>
+                    <path d="M35 40 L20 50 L30 55" fill="url(#lizaGrad)"/>
+                    <path d="M65 40 L80 50 L70 55" fill="url(#lizaGrad)"/>
+                    <path d="M50 15 L45 5 L48 15 M50 15 L55 5 L52 15" fill="url(#lizaGrad)"/>
+                    <ellipse cx="42" cy="33" rx="6" ry="4" fill="#FFD700"/>
+                    <circle cx="43" cy="33" r="2" fill="#333"/>
+                    <ellipse cx="58" cy="33" rx="6" ry="4" fill="#FFD700"/>
+                    <circle cx="59" cy="33" r="2" fill="#333"/>
+                    <path d="M42 45 Q50 52 58 45" stroke="#333" stroke-width="2" fill="none"/>
+                    <path d="M48 50 L52 60 L56 50" fill="#333"/>
+                    <path d="M50 52 L50 60" stroke="#fff" stroke-width="1"/>
+                </svg>`
+            },
+            // 关卡7: 西诺克斯 Hinox - 独眼巨人
+            {
+                name: '西诺克斯',
+                sound: 'hinox',
+                cssClass: 'hinox',
+                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="hinoxGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#CD853F;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#8B4513;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <ellipse cx="50" cy="65" rx="35" ry="30" fill="url(#hinoxGrad)"/>
+                    <circle cx="50" cy="35" r="28" fill="url(#hinoxGrad)"/>
+                    <circle cx="50" cy="32" r="15" fill="white"/>
+                    <circle cx="50" cy="34" r="10" fill="#8B0000"/>
+                    <circle cx="53" cy="30" r="4" fill="#333"/>
+                    <circle cx="54" cy="29" r="1.5" fill="white"/>
+                    <path d="M40 50 Q50 60 60 50" stroke="#333" stroke-width="3" fill="none"/>
+                    <ellipse cx="50" cy="95" rx="15" ry="4" fill="#333" opacity="0.4"/>
+                </svg>`
+            },
+            // 关卡8: 岩石巨人 Stone Talus - 石头怪物
+            {
+                name: '岩石巨人',
+                sound: 'talus',
+                cssClass: 'talus',
+                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="talusGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#A9A9A9;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#696969;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <ellipse cx="50" cy="70" rx="32" ry="28" fill="url(#talusGrad)"/>
+                    <circle cx="50" cy="35" r="30" fill="url(#talusGrad)"/>
+                    <ellipse cx="35" cy="30" rx="10" ry="12" fill="#FFD700" opacity="0.8"/>
+                    <circle cx="35" cy="30" r="5" fill="#333"/>
+                    <circle cx="36" cy="29" r="2" fill="white"/>
+                    <ellipse cx="65" cy="30" rx="10" ry="12" fill="#FFD700" opacity="0.8"/>
+                    <circle cx="65" cy="30" r="5" fill="#333"/>
+                    <circle cx="66" cy="29" r="2" fill="white"/>
+                    <path d="M42 50 Q50 55 58 50" stroke="#333" stroke-width="3" fill="none"/>
+                    <circle cx="35" cy="90" r="5" fill="#FFD700"/>
+                    <circle cx="65" cy="90" r="5" fill="#FFD700"/>
+                    <circle cx="50" cy="95" r="3" fill="#FFD700"/>
+                </svg>`
+            },
+            // 关卡9: 莱尼尔 Lynel - 狮人马精英怪
+            {
+                name: '莱尼尔',
+                sound: 'lynel',
+                cssClass: 'lynel',
+                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="lynelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#8B7355;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#5D4E37;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="lynelMane" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#CD853F;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <ellipse cx="50" cy="75" rx="25" ry="20" fill="url(#lynelGrad)"/>
+                    <circle cx="50" cy="38" r="25" fill="url(#lynelGrad)"/>
+                    <path d="M25 35 Q15 20 25 10 Q35 20 30 35" fill="url(#lynelMane)"/>
+                    <path d="M75 35 Q85 20 75 10 Q65 20 70 35" fill="url(#lynelMane)"/>
+                    <ellipse cx="40" cy="35" rx="7" ry="5" fill="#FFD700"/>
+                    <circle cx="41" cy="35" r="3" fill="#333"/>
+                    <ellipse cx="60" cy="35" rx="7" ry="5" fill="#FFD700"/>
+                    <circle cx="61" cy="35" r="3" fill="#333"/>
+                    <path d="M42 48 Q50 55 58 48" stroke="#333" stroke-width="2" fill="none"/>
+                    <path d="M48 58 L52 68 L56 58" fill="#333"/>
+                    <path d="M30 55 L20 80 L40 75" fill="url(#lynelGrad)"/>
+                    <path d="M70 55 L80 80 L60 75" fill="url(#lynelGrad)"/>
+                </svg>`
+            },
+            // 关卡10: 盖侬 Ganon - 最终BOSS
+            {
+                name: '盖侬',
+                sound: 'ganon',
+                cssClass: 'ganon',
+                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <radialGradient id="ganonGrad" cx="50%" cy="40%" r="70%">
+                            <stop offset="0%" style="stop-color:#9400D3;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#4B0082;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#1A0033;stop-opacity:1" />
+                        </radialGradient>
+                        <filter id="ganonGlow">
+                            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <ellipse cx="50" cy="70" rx="35" ry="28" fill="url(#ganonGrad)" filter="url(#ganonGlow)"/>
+                    <circle cx="50" cy="32" r="28" fill="url(#ganonGrad)" filter="url(#ganonGlow)"/>
+                    <ellipse cx="38" cy="30" rx="8" ry="6" fill="#FF0000"/>
+                    <circle cx="39" cy="30" r="3" fill="#FFD700"/>
+                    <ellipse cx="62" cy="30" rx="8" ry="6" fill="#FF0000"/>
+                    <circle cx="63" cy="30" r="3" fill="#FFD700"/>
+                    <path d="M42 50 Q50 58 58 50" stroke="#FF0000" stroke-width="3" fill="none"/>
+                    <path d="M35 20 L30 5 L40 15" fill="#9400D3" stroke="#FF0000" stroke-width="1"/>
+                    <path d="M65 20 L70 5 L60 15" fill="#9400D3" stroke="#FF0000" stroke-width="1"/>
+                    <circle cx="30" cy="20" r="4" fill="#FF0000">
+                        <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="70" cy="20" r="4" fill="#FF0000">
+                        <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite"/>
+                    </circle>
+                </svg>`
+            }
+        ];
             
             for (let i = 1; i <= TOTAL_LEVELS; i++) {
                 const btn = document.createElement('button');
                 btn.className = 'level-btn';
                 btn.setAttribute('data-level', i);
-                btn.setAttribute('data-monster', monsters[i - 1].emoji);
-                
+
                 const progress = levelProgress[i] || {};
                 const isUnlocked = i === 1 || (levelProgress[i - 1] && levelProgress[i - 1].completed);
-                
+
                 if (!isUnlocked) {
                     btn.classList.add('locked');
                     btn.disabled = true;
                 } else if (progress.completed) {
                     btn.classList.add('completed');
                 }
-                
-                // 怪物图标
-                const monsterIcon = document.createElement('span');
+
+                // 怪物图标 - 使用SVG
+                const monsterIcon = document.createElement('div');
                 monsterIcon.className = 'monster-icon';
-                monsterIcon.textContent = monsters[i - 1].emoji;
+                monsterIcon.innerHTML = monsters[i - 1].icon;
+
+                // 为特定怪物添加特殊动画类
+                if (monsters[i - 1].cssClass === 'ganon') {
+                    monsterIcon.classList.add('ganon-aura');
+                } else if (monsters[i - 1].cssClass === 'chuchu' || monsters[i - 1].cssClass === 'lizalfos') {
+                    monsterIcon.classList.add('monster-breath');
+                }
+
                 btn.appendChild(monsterIcon);
-                
+
                 // 关卡名称
                 const levelName = document.createElement('div');
                 levelName.className = 'level-name';
                 levelName.textContent = `${i}关`;
                 btn.appendChild(levelName);
-                
+
                 // 怪物名称
                 const monsterName = document.createElement('div');
                 monsterName.className = 'level-name';
@@ -1210,19 +1554,22 @@
         function startLevel(level) {
             if (!levelProgress[level] && level !== 1) return;
             if (level > 1 && !levelProgress[level - 1]?.completed) return;
-            
+
+            // 播放怪物专属音效
+            playMonsterSound(monsters[level - 1].sound);
+
             currentLevel = level;
             currentQuestions = getLevelQuestions(level);
             currentQuestionIndex = 0;
             currentScore = 0;
-            
+
             document.getElementById('levelSelectScreen').style.display = 'none';
             document.getElementById('gameScreen').style.display = 'block';
             document.getElementById('levelNum').textContent = level;
-            
+
             displayQuestion();
             updateDisplay();
-            
+
             if (audioContext.state === 'suspended') {
                 audioContext.resume();
             }
