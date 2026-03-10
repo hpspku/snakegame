@@ -1059,7 +1059,6 @@
         }
         levelProgress[1].unlocked = true; // 第一关默认解锁
 
-        // 音效系统
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
         function playTone(frequency, duration, type = 'sine') {
@@ -1245,11 +1244,6 @@
             return shuffleArray(availableQuestions).slice(0, QUESTIONS_PER_LEVEL);
         }
 
-        // 渲染关卡选择界面
-        function renderLevelSelect() {
-            const grid = document.getElementById('levelsGrid');
-            grid.innerHTML = '';
-            
         // 塞尔达旷野之息怪物列表 - 按强度从弱到强
         // 10关怪物名称：丘丘、蜜蜂、蝙蝠、波克布林、莫力布林、蜥蜴战士、西诺克斯、岩石巨人、莱尼尔、盖侬
         // 使用Zelda Fandom等公共资源图片链接
@@ -1523,7 +1517,12 @@
                 </svg>`
             }
         ];
-            
+
+        // 渲染关卡选择界面
+        function renderLevelSelect() {
+            const grid = document.getElementById('levelsGrid');
+            grid.innerHTML = '';
+
             for (let i = 1; i <= TOTAL_LEVELS; i++) {
                 const btn = document.createElement('button');
                 btn.className = 'level-btn';
