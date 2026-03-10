@@ -161,17 +161,28 @@
 
         .level-btn {
             width: 100px;
-            height: 100px;
-            border-radius: 50%;
+            height: 120px;
+            border-radius: 15px;
             border: none;
             cursor: pointer;
             position: relative;
             transition: all 0.3s ease;
-            font-size: 2rem;
+            font-size: 2.5rem;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .level-name {
+            font-size: 0.7rem;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            margin-top: 5px;
+            text-align: center;
         }
 
         .level-btn::before {
@@ -186,55 +197,127 @@
             opacity: 0.7;
         }
 
-        /* 未解锁关卡 - 波克布林风格 */
+        .level-btn::after {
+            content: attr(data-monster);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 关卡1 - 丘丘 (最弱) */
+        .level-btn[data-level="1"] {
+            background: radial-gradient(circle, #9ACD32 0%, #6B8E23 100%);
+            border: 3px solid #556B2F;
+        }
+
+        /* 关卡2 - 波克布林 */
+        .level-btn[data-level="2"] {
+            background: radial-gradient(circle, #DEB887 0%, #8B4513 100%);
+            border: 3px solid #654321;
+        }
+
+        /* 关卡3 - 蓝波克布林 */
+        .level-btn[data-level="3"] {
+            background: radial-gradient(circle, #87CEEB 0%, #4682B4 100%);
+            border: 3px solid #5F9EA0;
+        }
+
+        /* 关卡4 - 红波克布林 */
+        .level-btn[data-level="4"] {
+            background: radial-gradient(circle, #FF6347 0%, #DC143C 100%);
+            border: 3px solid #B22222;
+        }
+
+        /* 关卡5 - 黑波克布林 */
+        .level-btn[data-level="5"] {
+            background: radial-gradient(circle, #708090 0%, #2F4F4F 100%);
+            border: 3px solid #1C1C1C;
+        }
+
+        /* 关卡6 - 莫力布林 */
+        .level-btn[data-level="6"] {
+            background: radial-gradient(circle, #FF8C00 0%, #FF4500 100%);
+            border: 3px solid #FF0000;
+            animation: monsterBreath 2s ease-in-out infinite;
+        }
+
+        /* 关卡7 - 丘丘巨人 */
+        .level-btn[data-level="7"] {
+            background: radial-gradient(circle, #8B0000 0%, #4A0000 100%);
+            border: 3px solid #8B0000;
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+        }
+
+        /* 关卡8 - 西诺克斯 (Boss级) */
+        .level-btn[data-level="8"] {
+            background: radial-gradient(circle, #4B0082 0%, #2E0054 100%);
+            border: 3px solid #800080;
+            box-shadow: 0 0 30px rgba(75, 0, 130, 0.6);
+        }
+
+        /* 关卡9 - 人马 (精英怪) */
+        .level-btn[data-level="9"] {
+            background: radial-gradient(circle, #FFD700 0%, #FFA500 50%, #FF4500 100%);
+            border: 3px solid #FFD700;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.7);
+            animation: goldGlow 2s ease-in-out infinite;
+        }
+
+        /* 关卡10 - 盖侬 (最终Boss) */
+        .level-btn[data-level="10"] {
+            background: radial-gradient(circle, #8B008B 0%, #4B0082 50%, #000000 100%);
+            border: 4px solid #FF0000;
+            box-shadow: 0 0 50px rgba(139, 0, 139, 0.8), 0 0 30px rgba(255, 0, 0, 0.6);
+            animation: ganonPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes monsterBreath {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 6px 25px rgba(255, 140, 0, 0.5); }
+        }
+
+        @keyframes goldGlow {
+            0%, 100% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 0 50px rgba(255, 215, 0, 0.9), 0 0 20px rgba(255, 69, 0, 0.7); }
+        }
+
+        @keyframes ganonPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(139, 0, 139, 0.6), 0 0 20px rgba(255, 0, 0, 0.4); }
+            50% { transform: scale(1.1); box-shadow: 0 0 60px rgba(139, 0, 139, 0.9), 0 0 40px rgba(255, 0, 0, 0.7); }
+        }
+
+        /* 未解锁状态 */
         .level-btn.locked {
-            background: linear-gradient(145deg, #4a4a4a, #3a3a3a);
-            border: 3px solid #666;
+            opacity: 0.5;
             cursor: not-allowed;
-            opacity: 0.6;
+            filter: grayscale(100%);
         }
 
         .level-btn.locked::after {
             content: '🔒';
             position: absolute;
             font-size: 2rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
         }
 
-        /* 已解锁未完成 - 莫力布林风格 */
-        .level-btn.unlocked {
-            background: linear-gradient(145deg, #8B4513, #654321);
-            border: 3px solid #228B22;
-            animation: monsterBreath 2s ease-in-out infinite;
-        }
-
-        @keyframes monsterBreath {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .level-btn.unlocked:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(0,0,0,0.5);
-        }
-
-        /* 已完成 - 精英怪风格 */
+        /* 已完成状态 */
         .level-btn.completed {
-            background: linear-gradient(145deg, #FFD700, #FFA500);
-            border: 3px solid #FF4500;
-            animation: goldShine 2s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5), inset 0 0 20px rgba(0, 255, 0, 0.3);
         }
 
-        @keyframes goldShine {
-            0%, 100% { box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); }
-            50% { box-shadow: 0 4px 30px rgba(255, 215, 0, 0.6); }
+        .level-btn:hover:not(.locked) {
+            transform: scale(1.15);
         }
 
-        .level-btn.completed::after {
+        /* 已完成状态 */
+        .level-btn.completed {
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5), inset 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .level-btn.completed::before {
             content: '✓';
-            position: absolute;
-            font-size: 2.5rem;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .level-number {
@@ -564,8 +647,11 @@
             }
             .level-btn {
                 width: 120px;
-                height: 120px;
-                font-size: 2.5rem;
+                height: 150px;
+                font-size: 3rem;
+            }
+            .level-name {
+                font-size: 0.8rem;
             }
             .question-text { font-size: 2.2rem; }
             .option-btn { font-size: 1.8rem; padding: 25px; }
@@ -886,9 +972,25 @@
             const grid = document.getElementById('levelsGrid');
             grid.innerHTML = '';
             
+            // 塞尔达怪物列表，按强度从弱到强
+            const monsters = [
+                { emoji: '👾', name: '丘丘' }, // 关卡1: 丘丘 (Bokoblin - 小怪)
+                { emoji: '👹', name: '波克' }, // 关卡2: 波克布林 (普通怪)
+                { emoji: '👺', name: '蓝波' }, // 关卡3: 蓝波克布林 (中等怪)
+                { emoji: '🤡', name: '红波' }, // 关卡4: 红波克布林 (较强怪)
+                { emoji: '🦖', name: '黑波' }, // 关卡5: 黑波克布林 (精英怪)
+                { emoji: '👿', name: '莫力' }, // 关卡6: 莫力布林 (小Boss)
+                { emoji: '🐲', name: '丘丘巨人' }, // 关卡7: 丘丘巨人 (大Boss)
+                { emoji: '🦇', name: '西诺克斯' }, // 关卡8: 西诺克斯 (Boss级)
+                { emoji: '🎃', name: '人马' }, // 关卡9: 人马 (精英Boss)
+                { emoji: '💀👾', name: '盖侬' } // 关卡10: 盖侬 (最终Boss)
+            ];
+            
             for (let i = 1; i <= TOTAL_LEVELS; i++) {
                 const btn = document.createElement('button');
                 btn.className = 'level-btn';
+                btn.setAttribute('data-level', i);
+                btn.setAttribute('data-monster', monsters[i - 1].emoji);
                 
                 const progress = levelProgress[i] || {};
                 const isUnlocked = i === 1 || (levelProgress[i - 1] && levelProgress[i - 1].completed);
@@ -898,14 +1000,26 @@
                     btn.disabled = true;
                 } else if (progress.completed) {
                     btn.classList.add('completed');
-                } else {
-                    btn.classList.add('unlocked');
                 }
                 
-                const number = document.createElement('span');
-                number.className = 'level-number';
-                number.textContent = i;
-                btn.appendChild(number);
+                // 怪物图标
+                const monsterIcon = document.createElement('span');
+                monsterIcon.className = 'monster-icon';
+                monsterIcon.textContent = monsters[i - 1].emoji;
+                btn.appendChild(monsterIcon);
+                
+                // 关卡名称
+                const levelName = document.createElement('div');
+                levelName.className = 'level-name';
+                levelName.textContent = `${i}关`;
+                btn.appendChild(levelName);
+                
+                // 怪物名称
+                const monsterName = document.createElement('div');
+                monsterName.className = 'level-name';
+                monsterName.style.fontSize = '0.6rem';
+                monsterName.textContent = monsters[i - 1].name;
+                btn.appendChild(monsterName);
                 
                 // 显示星级
                 if (progress.completed) {
