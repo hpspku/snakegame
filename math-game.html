@@ -140,7 +140,6 @@
             width: 200px;
             height: 200px;
             margin: 0 auto 30px;
-            background: linear-gradient(145deg, #FFE4E1, #FFB6C1);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -150,6 +149,9 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             animation: characterBounce 3s ease-in-out infinite;
             cursor: pointer;
+            background-size: cover;
+            background-position: center;
+            background-image: url('character.png');
         }
 
         @keyframes characterBounce {
@@ -413,7 +415,12 @@
         }
 
         .reward-character {
-            font-size: 15rem;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            background-image: url('character.png');
             animation: happyJump 0.5s ease infinite;
         }
 
@@ -443,10 +450,11 @@
         /* iPad 适配 */
         @media (min-width: 768px) {
             h1 { font-size: 3.5rem; }
-            .character { width: 300px; height: 300px; font-size: 10rem; }
+            .character { width: 300px; height: 300px; }
             .question-text { font-size: 2.2rem; }
             .option-btn { font-size: 1.8rem; padding: 25px; }
             .stat-box { font-size: 1.3rem; padding: 20px 30px; }
+            .reward-character { width: 400px; height: 400px; }
         }
 
         /* 横屏适配 */
@@ -493,7 +501,7 @@
 
         <!-- 主菜单 -->
         <div class="menu-screen" id="menuScreen">
-            <div class="character" id="mainCharacter">🦸</div>
+            <div class="character" id="mainCharacter"></div>
             <button class="btn btn-start" onclick="startGame()">开始闯关</button>
             <br>
             <button class="btn" onclick="showInstructions()">游戏说明</button>
@@ -557,7 +565,7 @@
     <!-- 小红花奖励弹窗 -->
     <div class="flower-reward-overlay" id="flowerRewardOverlay">
         <div class="flower-animation">🌸</div>
-        <div class="reward-character">🦸</div>
+        <div class="reward-character"></div>
         <div class="reward-text">鸿哥真棒，超级爱你！</div>
     </div>
 
