@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>黄飞鸿勇闯奥数世界</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', '幼圆', '圆体', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            overflow-x: hidden;
+            touch-action: manipulation;
+        }
+
+        .game-container {
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 漂浮的背景元素 */
+        .floating-element {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .star {
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #FFD700 0%, transparent 70%);
+            border-radius: 50%;
+            box-shadow: 0 0 20px #FFD700;
+        }
+
+        .cloud {
+            width: 100px;
+            height: 40px;
+            background: white;
+            border-radius: 50px;
+            position: absolute;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            padding: 20px;
+            border-radius: 20px;
+            border: 4px solid #ff6b6b;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ff6b6b;
+            text-shadow: 3px 3px 0 #fff, 5px 5px 10px rgba(0,0,0,0.2);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: linear-gradient(145deg, #FFE66D, #FFD93D);
+            padding: 15px 25px;
+            border-radius: 15px;
+            border: 3px solid #FFA500;
+            color: #333;
+            font-size: 1.1rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .stat-icon {
+            font-size: 1.8rem;
+        }
+
+        .flowers-display {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .flower {
+            font-size: 2rem;
+            animation: popIn 0.5s ease;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        /* 主菜单 */
+        .menu-screen {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .character {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            background: linear-gradient(145deg, #FFE4E1, #FFB6C1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            border: 5px solid #FF69B4;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: characterBounce 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        @keyframes characterBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .btn {
+            background: linear-gradient(145deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+            font-family: inherit;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .btn-start {
+            background: linear-gradient(145deg, #FF6B6B, #EE5A5A);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+            font-size: 2rem;
+            padding: 25px 80px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4); }
+            50% { box-shadow: 0 6px 40px rgba(255, 107, 107, 0.8); }
+        }
+
+        /* 游戏区域 */
+        .game-screen {
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #ddd;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 3px solid #4CAF50;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .question-box {
+            background: linear-gradient(145deg, #E3F2FD, #BBDEFB);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            border: 4px solid #2196F3;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .question-number {
+            color: #1976D2;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .question-text {
+            color: #333;
+            font-size: 1.8rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .difficulty-easy { background: linear-gradient(145deg, #4CAF50, #45a049); }
+        .difficulty-medium { background: linear-gradient(145deg, #FF9800, #F57C00); }
+        .difficulty-hard { background: linear-gradient(145deg, #f44336, #d32f2f); }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            background: linear-gradient(145deg, #fff, #f5f5f5);
+            border: 3px solid #E0E0E0;
+            border-radius: 15px;
+            padding: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            color: #333;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .option-btn:hover {
+            border-color: #4CAF50;
+            background: linear-gradient(145deg, #E8F5E9, #C8E6C9);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .option-btn:active {
+            transform: translateY(0);
+        }
+
+        .option-btn.correct {
+            background: linear-gradient(145deg, #4CAF50, #45a049);
+            border-color: #388E3C;
+            color: white;
+            animation: correctAnswer 0.5s ease;
+        }
+
+        .option-btn.wrong {
+            background: linear-gradient(145deg, #f44336, #d32f2f);
+            border-color: #d32f2f;
+            color: white;
+            animation: wrongAnswer 0.5s ease;
+        }
+
+        @keyframes correctAnswer {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes wrongAnswer {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* 结果弹窗 */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .overlay.show {
+            display: flex;
+        }
+
+        .result-content {
+            background: linear-gradient(145deg, #fff, #f8f8f8);
+            padding: 40px 60px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: popIn 0.5s ease;
+            border: 5px solid #FFD700;
+        }
+
+        .result-icon {
+            font-size: 6rem;
+            margin-bottom: 20px;
+            animation: bounce 1s ease infinite;
+        }
+
+        .result-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .result-score {
+            font-size: 1.8rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .result-score span {
+            color: #FF6B6B;
+            font-weight: bold;
+        }
+
+        /* 小红花奖励动画 */
+        .flower-reward-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            flex-direction: column;
+        }
+
+        .flower-reward-overlay.show {
+            display: flex;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .flower-animation {
+            font-size: 10rem;
+            animation: flowerPop 1s ease infinite alternate;
+        }
+
+        @keyframes flowerPop {
+            from { transform: scale(1) rotate(0deg); }
+            to { transform: scale(1.3) rotate(20deg); }
+        }
+
+        .reward-text {
+            color: #FF69B4;
+            font-size: 3rem;
+            margin-top: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: textGlow 1s ease infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px #FF69B4; }
+            to { text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 40px #FF1493, 0 0 60px #FF69B4; }
+        }
+
+        .reward-character {
+            font-size: 15rem;
+            animation: happyJump 0.5s ease infinite;
+        }
+
+        @keyframes happyJump {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-50px) rotate(10deg); }
+        }
+
+        /* 特效粒子 */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            animation: particleFall 3s linear forwards;
+        }
+
+        @keyframes particleFall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+
+        /* iPad 适配 */
+        @media (min-width: 768px) {
+            h1 { font-size: 3.5rem; }
+            .character { width: 300px; height: 300px; font-size: 10rem; }
+            .question-text { font-size: 2.2rem; }
+            .option-btn { font-size: 1.8rem; padding: 25px; }
+            .stat-box { font-size: 1.3rem; padding: 20px 30px; }
+        }
+
+        /* 横屏适配 */
+        @media (orientation: landscape) and (min-width: 1024px) {
+            .game-container {
+                padding: 30px;
+            }
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- 漂浮的背景元素 -->
+        <div class="floating-element star" style="top: 10%; left: 5%;"></div>
+        <div class="floating-element star" style="top: 20%; right: 10%; animation-delay: 1s;"></div>
+        <div class="floating-element star" style="bottom: 30%; left: 8%; animation-delay: 2s;"></div>
+        <div class="floating-element star" style="bottom: 20%; right: 5%; animation-delay: 3s;"></div>
+        <div class="floating-element cloud" style="top: 5%; left: 30%;"></div>
+        <div class="floating-element cloud" style="top: 60%; right: 20%; animation-delay: 2s;"></div>
+
+        <div class="header">
+            <h1>🦸 黄飞鸿勇闯奥数世界 🌟</h1>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-box">
+                <span class="stat-icon">🏆</span>
+                <span>最高分: <span id="highScore">0</span></span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-icon">🌸</span>
+                <span>小红花: <span id="flowerCount">0</span></span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-icon">⭐</span>
+                <span>本次得分: <span id="currentScore">0</span></span>
+            </div>
+        </div>
+
+        <div class="flowers-display" id="flowersDisplay"></div>
+
+        <!-- 主菜单 -->
+        <div class="menu-screen" id="menuScreen">
+            <div class="character" id="mainCharacter">🦸</div>
+            <button class="btn btn-start" onclick="startGame()">开始闯关</button>
+            <br>
+            <button class="btn" onclick="showInstructions()">游戏说明</button>
+        </div>
+
+        <!-- 游戏界面 -->
+        <div class="game-screen" id="gameScreen">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill">进度: 1/10</div>
+            </div>
+
+            <div class="question-box">
+                <div class="question-number">
+                    第 <span id="questionNum">1</span> 题
+                    <span class="difficulty-badge difficulty-easy" id="difficultyBadge">简单</span>
+                </div>
+                <div class="question-text" id="questionText"></div>
+            </div>
+
+            <div class="options-grid" id="optionsGrid"></div>
+        </div>
+    </div>
+
+    <!-- 答题结果弹窗 -->
+    <div class="overlay" id="resultOverlay">
+        <div class="result-content">
+            <div class="result-icon" id="resultIcon">✅</div>
+            <div class="result-title" id="resultTitle">答对了！</div>
+            <div class="result-score" id="resultMessage"></div>
+            <button class="btn" onclick="nextQuestion()">继续闯关</button>
+        </div>
+    </div>
+
+    <!-- 闯关完成弹窗 -->
+    <div class="overlay" id="completeOverlay">
+        <div class="result-content">
+            <div class="result-icon" id="completeIcon">🎉</div>
+            <div class="result-title" id="completeTitle">闯关完成！</div>
+            <div class="result-score" id="completeScore"></div>
+            <div class="result-score" id="newFlowerMsg"></div>
+            <button class="btn" onclick="backToMenu()">返回主菜单</button>
+        </div>
+    </div>
+
+    <!-- 游戏说明弹窗 -->
+    <div class="overlay" id="instructionsOverlay">
+        <div class="result-content">
+            <div class="result-icon">📖</div>
+            <div class="result-title">游戏说明</div>
+            <div class="result-score" style="text-align: left; line-height: 2;">
+                🎯 每次大闯关共 10 道奥数题<br>
+                ✅ 答对得 1 分，答错不得分<br>
+                🌸 每答对 10 题奖励一朵小红花<br>
+                🏆 小红花会一直累计<br>
+                💪 挑战最高分，做奥数小达人！
+            </div>
+            <button class="btn" onclick="closeInstructions()">知道了</button>
+        </div>
+    </div>
+
+    <!-- 小红花奖励弹窗 -->
+    <div class="flower-reward-overlay" id="flowerRewardOverlay">
+        <div class="flower-animation">🌸</div>
+        <div class="reward-character">🦸</div>
+        <div class="reward-text">鸿哥真棒，超级爱你！</div>
+    </div>
+
+    <script>
+        // 题库 - 2020-2025年中国大陆及香港小学一二三年级奥数竞赛题
+        const questionBank = [
+            // 一年级简单题
+            {
+                question: "小明有 5 个苹果，妈妈又给了他 3 个，小明现在有几个苹果？",
+                options: ["6", "7", "8", "9"],
+                correct: 2,
+                difficulty: "easy"
+            },
+            {
+                question: "找规律：2, 4, 6, 8, ( )",
+                options: ["9", "10", "11", "12"],
+                correct: 1,
+                difficulty: "easy"
+            },
+            {
+                question: "1 + 2 + 3 + 4 = ？",
+                options: ["8", "9", "10", "11"],
+                correct: 2,
+                difficulty: "easy"
+            },
+            {
+                question: "小红有 8 支铅笔，送给同学 2 支，还剩几支？",
+                options: ["4", "5", "6", "7"],
+                correct: 2,
+                difficulty: "easy"
+            },
+            {
+                question: "比 10 大 3 的数是几？",
+                options: ["11", "12", "13", "14"],
+                correct: 2,
+                difficulty: "easy"
+            },
+            // 一年级中等题
+            {
+                question: "排队做操，小明前面有 4 个人，后面有 5 个人，这一队共有几人？",
+                options: ["9", "10", "11", "12"],
+                correct: 1,
+                difficulty: "medium"
+            },
+            {
+                question: "3 个小朋友互相握手，一共要握手几次？",
+                options: ["2", "3", "4", "6"],
+                correct: 1,
+                difficulty: "medium"
+            },
+            {
+                question: "把一根绳子对折 2 次，剪断，可以得到几段？",
+                options: ["3", "4", "5", "6"],
+                correct: 2,
+                difficulty: "medium"
+            },
+            {
+                question: "从 1 数到 20，数字'2'出现了几次？",
+                options: ["2", "3", "4", "5"],
+                correct: 1,
+                difficulty: "medium"
+            },
+            {
+                question: "小强今年 7 岁，爸爸比他大 25 岁，5 年后爸爸几岁？",
+                options: ["30", "32", "37", "42"],
+                correct: 2,
+                difficulty: "medium"
+            },
+            // 一年级难题
+            {
+                question: "笼子里有鸡和兔共 5 只，共有 12 条腿，鸡有几只？",
+                options: ["1", "2", "3", "4"],
+                correct: 3,
+                difficulty: "hard"
+            },
+            {
+                question: "时钟 3 点敲 3 下，需要 6 秒，6 点敲 6 下需要几秒？",
+                options: ["12", "15", "18", "30"],
+                correct: 1,
+                difficulty: "hard"
+            },
+            // 二年级简单题
+            {
+                question: "25 + 37 = ？",
+                options: ["51", "52", "62", "72"],
+                correct: 2,
+                difficulty: "easy"
+            },
+            {
+                question: "一个苹果重 150 克，3 个苹果重多少克？",
+                options: ["350", "400", "450", "500"],
+                correct: 2,
+                difficulty: "easy"
+            },
+            {
+                question: "找规律：1, 4, 9, 16, ( )",
+                options: ["20", "25", "30", "36"],
+                correct: 1,
+                difficulty: "easy"
+            },
+            // 二年级中等题
+            {
+                question: "一本书有 60 页，小明每天看 8 页，几天能看完？",
+                options: ["6", "7", "8", "9"],
+                correct: 1,
+                difficulty: "medium"
+            },
+            {
+                question: "有红、黄、蓝 3 种颜色的球，每种 4 个，至少拿出几个才能保证有两个同色？",
+                options: ["3", "4", "5", "6"],
+                correct: 1,
+                difficulty: "medium"
+            },
+            {
+                question: "小华有 100 元钱，买了 3 本书，每本 28 元，还剩多少元？",
+                options: ["12", "14", "16", "18"],
+                correct: 2,
+                difficulty: "medium"
+            },
+            {
+                question: "一个长方形周长是 20 厘米，长是 6 厘米，宽是几厘米？",
+                options: ["3", "4", "5", "7"],
+                correct: 1,
+                difficulty: "medium"
+            },
+            // 二年级难题
+            {
+                question: "甲乙两人分糖果，甲得总数的 1/3 还多 2 个，乙得 8 个，共有多少糖果？",
+                options: ["10", "12", "15", "18"],
+                correct: 2,
+                difficulty: "hard"
+            },
+            {
+                question: "一个两位数，十位数字比个位数字大 3，两个数字之和是 11，这个数是？",
+                options: ["52", "63", "74", "85"],
+                correct: 2,
+                difficulty: "hard"
+            },
+            // 三年级简单题
+            {
+                question: "156 ÷ 13 = ？",
+                options: ["10", "11", "12", "13"],
+                correct: 2,
+                difficulty: "easy"
+            },
+            {
+                question: "1 小时 = ( ) 分钟",
+                options: ["50", "60", "100", "1000"],
+                correct: 1,
+                difficulty: "easy"
+            },
+            {
+                question: "正方形有 ( ) 条对称轴",
+                options: ["2", "4", "6", "8"],
+                correct: 1,
+                difficulty: "easy"
+            },
+            // 三年级中等题
+            {
+                question: "小明比小红大 3 岁，小红比小丽小 2 岁，小丽比小明大几岁？",
+                options: ["1", "3", "5", "无法确定"],
+                correct: 2,
+                difficulty: "medium"
+            },
+            {
+                question: "被减数是 1000，减数是 234，差是？",
+                options: ["766", "776", "786", "796"],
+                correct: 0,
+                difficulty: "medium"
+            },
+            {
+                question: "用 1、2、3、4 组成的最大四位数是？",
+                options: ["1234", "1243", "4321", "4312"],
+                correct: 2,
+                difficulty: "medium"
+            },
+            {
+                question: "长方形的面积是 24 平方厘米，长是 6 厘米，周长是？",
+                options: ["16", "18", "20", "24"],
+                correct: 2,
+                difficulty: "medium"
+            },
+            // 三年级难题
+            {
+                question: "甲乙两数的和是 100，甲数是乙数的 3 倍，乙数是？",
+                options: ["20", "25", "30", "50"],
+                correct: 1,
+                difficulty: "hard"
+            },
+            {
+                question: "把 10 个苹果分给 3 个小朋友，每人至少分 1 个，有多少种分法？",
+                options: ["6", "8", "10", "12"],
+                correct: 1,
+                difficulty: "hard"
+            },
+            {
+                question: "一个数乘 3 再减 5 得 19，这个数是？",
+                options: ["7", "8", "9", "10"],
+                correct: 1,
+                difficulty: "hard"
+            },
+            // 香港小学奥数题
+            {
+                question: "陳先生有 500 元，買了一本書用去 120 元，買了一支筆用去 30 元，還有幾元？",
+                options: ["340", "350", "360", "370"],
+                correct: 1,
+                difficulty: "easy"
+            },
+            {
+                question: "小美有 24 個糖果，分給 6 個朋友，每人能分得幾個？",
+                options: ["3", "4", "5", "6"],
+                correct: 1,
+                difficulty: "easy"
+            },
+            {
+                question: "找規律：3, 6, 12, 24, ( )",
+                options: ["36", "42", "48", "54"],
+                correct: 2,
+                difficulty: "medium"
+            },
+            {
+                question: "一盒餅乾有 36 塊，小華每天吃 4 塊，幾天吃完？",
+                options: ["7", "8", "9", "10"],
+                correct: 2,
+                difficulty: "medium"
+            },
+            {
+                question: "小明比小華高 10 厘米，小華比小英矮 5 厘米，小明比小英高幾厘米？",
+                options: ["5", "10", "15", "20"],
+                correct: 2,
+                difficulty: "hard"
+            }
+        ];
+
+        // 游戏状态
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let currentScore = 0;
+        let flowerCount = parseInt(localStorage.getItem('flowerCount')) || 0;
+        let highScore = parseInt(localStorage.getItem('highScore')) || 0;
+        let totalCorrectAnswers = parseInt(localStorage.getItem('totalCorrectAnswers')) || 0;
+
+        // 音效系统
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playTone(frequency, duration, type = 'sine') {
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = frequency;
+            oscillator.type = type;
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + duration);
+        }
+
+        function playCorrectSound() {
+            const sounds = [
+                () => { playTone(523.25, 0.2); setTimeout(() => playTone(659.25, 0.2), 150); },
+                () => { playTone(698.46, 0.2); setTimeout(() => playTone(880, 0.3), 150); },
+                () => { playTone(523.25, 0.15); setTimeout(() => playTone(659.25, 0.15), 100); setTimeout(() => playTone(783.99, 0.25), 200); }
+            ];
+            sounds[Math.floor(Math.random() * sounds.length)]();
+        }
+
+        function playWrongSound() {
+            const sounds = [
+                () => { playTone(200, 0.3, 'sawtooth'); setTimeout(() => playTone(150, 0.4, 'sawtooth'), 200); },
+                () => { playTone(100, 0.4, 'square'); setTimeout(() => playTone(80, 0.5, 'square'), 300); }
+            ];
+            sounds[Math.floor(Math.random() * sounds.length)]();
+        }
+
+        function playRewardSound() {
+            const melody = [523.25, 587.33, 659.25, 698.46, 783.99, 880, 987.77, 1046.50];
+            melody.forEach((freq, i) => {
+                setTimeout(() => playTone(freq, 0.3), i * 120);
+            });
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-CN';
+                utterance.rate = 1;
+                utterance.pitch = 1.2;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        // 创建特效粒子
+        function createParticles(emoji, count = 20) {
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.textContent = emoji;
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = '-50px';
+                particle.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                particle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 4000);
+            }
+        }
+
+        // 更新显示
+        function updateDisplay() {
+            document.getElementById('highScore').textContent = highScore;
+            document.getElementById('flowerCount').textContent = flowerCount;
+            document.getElementById('currentScore').textContent = currentScore;
+            updateFlowersDisplay();
+        }
+
+        function updateFlowersDisplay() {
+            const container = document.getElementById('flowersDisplay');
+            container.innerHTML = '';
+            for (let i = 0; i < flowerCount; i++) {
+                const flower = document.createElement('span');
+                flower.className = 'flower';
+                flower.textContent = '🌸';
+                flower.style.animationDelay = (i * 0.1) + 's';
+                container.appendChild(flower);
+            }
+        }
+
+        // 打乱数组
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        // 开始游戏
+        function startGame() {
+            document.getElementById('menuScreen').style.display = 'none';
+            document.getElementById('gameScreen').style.display = 'block';
+            
+            currentQuestions = shuffleArray(questionBank).slice(0, 10);
+            currentQuestionIndex = 0;
+            currentScore = 0;
+            
+            displayQuestion();
+            updateDisplay();
+            
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+        }
+
+        // 显示问题
+        function displayQuestion() {
+            const question = currentQuestions[currentQuestionIndex];
+            
+            document.getElementById('questionNum').textContent = currentQuestionIndex + 1;
+            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('progressFill').style.width = ((currentQuestionIndex + 1) / 10 * 100) + '%';
+            document.getElementById('progressFill').textContent = `进度: ${currentQuestionIndex + 1}/10`;
+            
+            const difficultyBadge = document.getElementById('difficultyBadge');
+            difficultyBadge.className = 'difficulty-badge difficulty-' + question.difficulty;
+            difficultyBadge.textContent = question.difficulty === 'easy' ? '简单' : (question.difficulty === 'medium' ? '中等' : '困难');
+            
+            const optionsGrid = document.getElementById('optionsGrid');
+            optionsGrid.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = option;
+                btn.onclick = () => checkAnswer(index);
+                optionsGrid.appendChild(btn);
+            });
+        }
+
+        // 检查答案
+        function checkAnswer(selectedIndex) {
+            const question = currentQuestions[currentQuestionIndex];
+            const buttons = document.querySelectorAll('.option-btn');
+            
+            buttons.forEach(btn => btn.disabled = true);
+            
+            if (selectedIndex === question.correct) {
+                currentScore++;
+                totalCorrectAnswers++;
+                localStorage.setItem('totalCorrectAnswers', totalCorrectAnswers);
+                
+                buttons[selectedIndex].classList.add('correct');
+                playCorrectSound();
+                createParticles('🌟', 15);
+                createParticles('✨', 10);
+                
+                showResult(true);
+            } else {
+                buttons[selectedIndex].classList.add('wrong');
+                buttons[question.correct].classList.add('correct');
+                playWrongSound();
+                createParticles('💩', 5);
+                
+                showResult(false);
+            }
+            
+            updateDisplay();
+        }
+
+        // 显示结果
+        function showResult(isCorrect) {
+            const overlay = document.getElementById('resultOverlay');
+            const icon = document.getElementById('resultIcon');
+            const title = document.getElementById('resultTitle');
+            const message = document.getElementById('resultMessage');
+            
+            if (isCorrect) {
+                icon.textContent = '🎉';
+                title.textContent = '答对了！太棒了！';
+                message.innerHTML = '🌸🌸🌸 加油继续闯关！🌸🌸🌸';
+            } else {
+                icon.textContent = '😅';
+                title.textContent = '答错了！';
+                message.innerHTML = '💪 别灰心，继续努力！💪';
+            }
+            
+            overlay.classList.add('show');
+        }
+
+        // 下一题
+        function nextQuestion() {
+            document.getElementById('resultOverlay').classList.remove('show');
+            
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex >= 10) {
+                completeGame();
+            } else {
+                displayQuestion();
+            }
+        }
+
+        // 完成游戏
+        function completeGame() {
+            document.getElementById('gameScreen').style.display = 'none';
+            document.getElementById('completeOverlay').classList.add('show');
+            
+            const icon = document.getElementById('completeIcon');
+            const title = document.getElementById('completeTitle');
+            const score = document.getElementById('completeScore');
+            const flowerMsg = document.getElementById('newFlowerMsg');
+            
+            if (currentScore > highScore) {
+                highScore = currentScore;
+                localStorage.setItem('highScore', highScore);
+                icon.textContent = '🏆';
+                title.textContent = '恭喜！新纪录！';
+                createParticles('🏆', 30);
+            } else {
+                icon.textContent = '🎉';
+                title.textContent = '闯关完成！';
+            }
+            
+            score.innerHTML = `本次得分：<span>${currentScore}</span>/10`;
+            
+            // 检查是否获得小红花
+            const oldFlowerCount = flowerCount;
+            flowerCount += Math.floor(totalCorrectAnswers / 10) * 10 - oldFlowerCount;
+            localStorage.setItem('flowerCount', flowerCount);
+            
+            if (flowerCount > oldFlowerCount) {
+                flowerMsg.innerHTML = `🎁 获得 ${flowerCount - oldFlowerCount} 朵小红花！🎁`;
+                showFlowerReward();
+            } else {
+                flowerMsg.innerHTML = '';
+            }
+            
+            updateDisplay();
+        }
+
+        // 显示小红花奖励
+        function showFlowerReward() {
+            const overlay = document.getElementById('flowerRewardOverlay');
+            overlay.classList.add('show');
+            playRewardSound();
+            speak('鸿哥真棒，超级爱你！');
+            createParticles('🌸', 30);
+            createParticles('💕', 20);
+            
+            setTimeout(() => {
+                overlay.classList.remove('show');
+            }, 5000);
+        }
+
+        // 返回主菜单
+        function backToMenu() {
+            document.getElementById('completeOverlay').classList.remove('show');
+            document.getElementById('menuScreen').style.display = 'block';
+            document.getElementById('gameScreen').style.display = 'none';
+            updateDisplay();
+        }
+
+        // 显示说明
+        function showInstructions() {
+            document.getElementById('instructionsOverlay').classList.add('show');
+        }
+
+        function closeInstructions() {
+            document.getElementById('instructionsOverlay').classList.remove('show');
+        }
+
+        // 角色点击动画
+        document.getElementById('mainCharacter').addEventListener('click', function() {
+            this.style.animation = 'none';
+            setTimeout(() => {
+                this.style.animation = 'characterBounce 3s ease-in-out infinite';
+            }, 10);
+            playCorrectSound();
+            createParticles('❤️', 10);
+        });
+
+        // 初始化
+        updateDisplay();
+    </script>
+</body>
+</html>
