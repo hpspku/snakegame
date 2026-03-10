@@ -310,6 +310,14 @@
         }
 
         /* 怪物图标SVG样式 */
+        .monster-icon img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            transition: all 0.3s ease;
+        }
+
         .monster-icon svg {
             width: 50px;
             height: 50px;
@@ -317,6 +325,7 @@
             transition: all 0.3s ease;
         }
 
+        .level-btn:hover .monster-icon img,
         .level-btn:hover .monster-icon svg {
             transform: scale(1.1);
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
@@ -340,6 +349,23 @@
         @keyframes ganonAura {
             0%, 100% { filter: drop-shadow(0 0 10px #9400D3); }
             50% { filter: drop-shadow(0 0 20px #FF0000); }
+        }
+
+        /* 图片加载失败时的样式 */
+        .monster-icon img {
+            display: block;
+        }
+
+        .monster-icon .fallback {
+            display: none;
+        }
+
+        .monster-icon.image-failed img {
+            display: none;
+        }
+
+        .monster-icon.image-failed .fallback {
+            display: block;
         }
 
         /* 关卡1 - 丘丘 Chuchu (绿色) */
@@ -1226,13 +1252,15 @@
             
         // 塞尔达旷野之息怪物列表 - 按强度从弱到强
         // 10关怪物名称：丘丘、蜜蜂、蝙蝠、波克布林、莫力布林、蜥蜴战士、西诺克斯、岩石巨人、莱尼尔、盖侬
+        // 使用Zelda Fandom等公共资源图片链接
         const monsters = [
             // 关卡1: 丘丘 Chuchu - 凝胶状怪物
             {
                 name: '丘丘',
                 sound: 'chuchu',
                 cssClass: 'chuchu',
-                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                imageUrl: 'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/e/e0/BotW_Chuchu.png/revision/latest/scale-to-width/100?cb=20170303183952',
+                fallbackIcon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <radialGradient id="chuchuGrad" cx="50%" cy="40%" r="60%">
                             <stop offset="0%" style="stop-color:#98FB98;stop-opacity:1" />
@@ -1254,7 +1282,8 @@
                 name: '蜜蜂',
                 sound: 'bee',
                 cssClass: 'bee',
-                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                imageUrl: 'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/8/8f/BotW_Honeycrust.png/revision/latest/scale-to-width/100?cb=20170303184005',
+                fallbackIcon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="beeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
@@ -1277,7 +1306,8 @@
                 name: '蝙蝠',
                 sound: 'bat',
                 cssClass: 'bat',
-                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                imageUrl: 'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/a/a6/BotW_Keese.png/revision/latest/scale-to-width/100?cb=20170303184013',
+                fallbackIcon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <radialGradient id="batGrad" cx="50%" cy="50%" r="50%">
                             <stop offset="0%" style="stop-color:#8B0000;stop-opacity:1" />
@@ -1302,7 +1332,8 @@
                 name: '波克布林',
                 sound: 'bokoblin',
                 cssClass: 'bokoblin',
-                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                imageUrl: 'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/4/4d/BotW_Red_Bokoblin.png/revision/latest/scale-to-width/100?cb=20170303184021',
+                fallbackIcon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="bokoGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:1" />
@@ -1325,7 +1356,8 @@
                 name: '莫力布林',
                 sound: 'moblin',
                 cssClass: 'moblin',
-                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                imageUrl: 'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/0/0d/BotW_Moblin.png/revision/latest/scale-to-width/100?cb=20170303184033',
+                fallbackIcon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="moblinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" style="stop-color:#FF4500;stop-opacity:1" />
@@ -1349,7 +1381,8 @@
                 name: '蜥蜴战士',
                 sound: 'lizalfos',
                 cssClass: 'lizalfos',
-                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                imageUrl: 'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/2/2e/BotW_Lizalfos.png/revision/latest/scale-to-width/100?cb=20170303184042',
+                fallbackIcon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="lizaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" style="stop-color:#32CD32;stop-opacity:1" />
@@ -1375,7 +1408,8 @@
                 name: '西诺克斯',
                 sound: 'hinox',
                 cssClass: 'hinox',
-                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                imageUrl: 'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/6/68/BotW_Hinox.png/revision/latest/scale-to-width/100?cb=20170303184051',
+                fallbackIcon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="hinoxGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" style="stop-color:#CD853F;stop-opacity:1" />
@@ -1397,7 +1431,8 @@
                 name: '岩石巨人',
                 sound: 'talus',
                 cssClass: 'talus',
-                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                imageUrl: 'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/0/05/BotW_Stone_Talus.png/revision/latest/scale-to-width/100?cb=20170303184101',
+                fallbackIcon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="talusGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" style="stop-color:#A9A9A9;stop-opacity:1" />
@@ -1423,7 +1458,8 @@
                 name: '莱尼尔',
                 sound: 'lynel',
                 cssClass: 'lynel',
-                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                imageUrl: 'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/2/2f/BotW_Lynel.png/revision/latest/scale-to-width/100?cb=20170303184110',
+                fallbackIcon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="lynelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" style="stop-color:#8B7355;stop-opacity:1" />
@@ -1453,7 +1489,8 @@
                 name: '盖侬',
                 sound: 'ganon',
                 cssClass: 'ganon',
-                icon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                imageUrl: 'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/8/88/BotW_Calamity_Ganon.png/revision/latest/scale-to-width/100?cb=20170303184120',
+                fallbackIcon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <radialGradient id="ganonGrad" cx="50%" cy="40%" r="70%">
                             <stop offset="0%" style="stop-color:#9400D3;stop-opacity:1" />
@@ -1502,10 +1539,34 @@
                     btn.classList.add('completed');
                 }
 
-                // 怪物图标 - 使用SVG
+                // 怪物图标 - 优先使用图片,失败时使用SVG作为后备
                 const monsterIcon = document.createElement('div');
                 monsterIcon.className = 'monster-icon';
-                monsterIcon.innerHTML = monsters[i - 1].icon;
+
+                if (monsters[i - 1].imageUrl) {
+                    // 创建图片元素
+                    const img = document.createElement('img');
+                    img.src = monsters[i - 1].imageUrl;
+                    img.alt = monsters[i - 1].name;
+                    img.loading = 'lazy';
+
+                    // 图片加载失败时显示SVG后备
+                    img.onerror = function() {
+                        monsterIcon.classList.add('image-failed');
+                        console.log(`图片加载失败，使用SVG后备: ${monsters[i - 1].name}`);
+                    };
+
+                    // 创建SVG后备元素
+                    const fallback = document.createElement('div');
+                    fallback.className = 'fallback';
+                    fallback.innerHTML = monsters[i - 1].fallbackIcon;
+
+                    monsterIcon.appendChild(img);
+                    monsterIcon.appendChild(fallback);
+                } else {
+                    // 如果没有图片URL,直接使用SVG
+                    monsterIcon.innerHTML = monsters[i - 1].fallbackIcon;
+                }
 
                 // 为特定怪物添加特殊动画类
                 if (monsters[i - 1].cssClass === 'ganon') {
